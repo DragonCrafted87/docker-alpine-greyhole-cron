@@ -13,7 +13,7 @@ from kubernetes.stream import stream
 import urllib3
 
 # Local Imports
-from includes.python_logger import create_logger
+from python_logger import create_logger
 
 def main():
   logger = create_logger(PurePath(__file__).stem)
