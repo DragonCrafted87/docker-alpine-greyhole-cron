@@ -34,6 +34,9 @@ def main():
   k8s_response = api.list_namespaced_pod(namespace=namespace,
                                  label_selector=label_selector)
 
+  logger.info(f'ENV Commands {label_selector} {namespace} {command_switch}')
+  logger.info(f'{k8s_response}')
+
   for x in k8s_response.items:
     name = x.spec.hostname
 
