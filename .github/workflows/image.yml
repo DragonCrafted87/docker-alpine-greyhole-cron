@@ -63,3 +63,8 @@ jobs:
         if: always() && github.event_name != 'pull_request'
         run: |
           rm -f ${HOME}/.docker/config.json
+      -
+        name: notify
+        uses: wei/curl@v1
+        with:
+          args: -X POST https://hooks.microbadger.com/images/dragoncrafted87/alpine-greyhole-cron/
