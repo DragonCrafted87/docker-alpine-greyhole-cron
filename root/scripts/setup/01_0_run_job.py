@@ -27,7 +27,7 @@ def main():
   Configuration.set_default(configuration)
 
   api = core_v1_api.CoreV1Api()
-  label_selector = getenv('LABEL_SELECTOR','app=greyhole')
+  label_selector = getenv('LABEL_SELECTOR','role=greyhole')
   namespace = getenv('NAMESPACE','storage')
   command_switch = getenv('COMMAND_SWITCH', '')
 
@@ -37,8 +37,8 @@ def main():
   logger.info(f'ENV Commands {label_selector} {namespace} {command_switch}')
   logger.info(f'{k8s_response}')
 
-  for x in k8s_response.items:
-    name = x.spec.hostname
+  for pod in k8s_response.items:
+    name = pod.metadata.name
 
     k8s_response = api.read_namespaced_pod(name=name,
                                    namespace=namespace)
