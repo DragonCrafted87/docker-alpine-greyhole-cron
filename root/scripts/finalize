@@ -1,7 +1,10 @@
 #!/usr/bin/python3
 
+# System Imports
 from os import getenv
+from pathlib import PurePath
 
+# 3rd Party Imports
 from kubernetes import config
 from kubernetes.client import Configuration
 from kubernetes.client.api import core_v1_api
@@ -9,7 +12,11 @@ from kubernetes.client.rest import ApiException
 from kubernetes.stream import stream
 import urllib3
 
+# Local Imports
+from includes.python_logger import create_logger
+
 def main():
+  logger = create_logger(PurePath(__file__).stem)
   config.load_incluster_config()
 
   configuration = Configuration()
@@ -50,10 +57,7 @@ def main():
                 stderr=True, stdin=False,
                 stdout=True, tty=False)
 
-    print(f'Cleanup {name}:')
-    print(f'{k8s_response}\n')
-    print()
-
+    logger.info(f'Cleanup {name}: {k8s_response}')
 
 if __name__ == '__main__':
   main()
