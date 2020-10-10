@@ -17,6 +17,7 @@ from includes.python_logger import create_logger
 
 def main():
   logger = create_logger(PurePath(__file__).stem)
+
   config.load_incluster_config()
 
   configuration = Configuration()
@@ -58,6 +59,8 @@ def main():
                 stdout=True, tty=False)
 
     logger.info(f'Cleanup {name}: {k8s_response}')
+
+  logger.info(f'Successfully executed cron job')
 
 if __name__ == '__main__':
   main()
