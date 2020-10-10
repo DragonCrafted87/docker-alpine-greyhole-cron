@@ -35,7 +35,7 @@ def main():
                                  label_selector=label_selector)
 
   logger.info(f'ENV Commands {label_selector} {namespace} {command_switch}')
-  logger.info(f'{k8s_response}')
+  logger.debug(f'{k8s_response}')
 
   for pod in k8s_response.items:
     name = pod.metadata.name
